@@ -8,6 +8,7 @@ import com.kundan.model.Student;
 public class StudentUtil {
 	
 	public void mapOneStudentToOther(Student actualStudent, Student student) {
+		
 		actualStudent.setStdName(student.getStdName());
 		actualStudent.setStdEmail(student.getStdEmail());
 		actualStudent.setStdAddr(student.getStdAddr());
