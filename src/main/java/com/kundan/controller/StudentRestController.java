@@ -22,7 +22,7 @@ import com.kundan.service.StudentService;
 import com.kundan.util.StudentUtil;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("rest/student")
 public class StudentRestController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(StudentRestController.class);
@@ -149,15 +149,16 @@ public class StudentRestController {
 	 * else provide message "No Student Exist"
 	 */
 	@PutMapping("/update/{stdId}")
-	public ResponseEntity<String> updateStudent(@PathVariable Integer stdId,@RequestBody Student student) {
+	public ResponseEntity<String> updateStudent(@PathVariable Integer stdId, @RequestBody Student student) {
 		LOGGER.info("Enterd in updateStudent method");
 		ResponseEntity<String> response = null;
 		try {
 			LOGGER.info("About to make service call for data check");
 			Optional<Student> optStudent = studentService.getOneStudent(stdId);
 			if(optStudent.isPresent()) {
-				studentUtil.mapOneStudentToOther(optStudent.get(),student);
-				studentService.saveStudent(student);
+				Student actualStudent = optStudent.get();
+				studentUtil.mapToActualObject(actualStudent,student);
+				studentService.updateStudent(actualStudent);
 				LOGGER.info("Student exist with given id and updated=>"+stdId);
 				response = new ResponseEntity<String>("Student '"+stdId+"' Updated",HttpStatus.RESET_CONTENT);
 			} else {
@@ -167,6 +168,7 @@ public class StudentRestController {
 		} catch (Exception e) {
 			LOGGER.error("Unable to perform update Operation =>"+e.getMessage());
 			response = new ResponseEntity<String>("Unable to update",HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
 		}
 		LOGGER.info("About to exit updateStudent method with Response");
 		return response;

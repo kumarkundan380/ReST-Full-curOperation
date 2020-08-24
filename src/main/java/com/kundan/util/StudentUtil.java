@@ -7,12 +7,15 @@ import com.kundan.model.Student;
 @Component
 public class StudentUtil {
 	
-	public void mapOneStudentToOther(Student actualStudent, Student student) {
-		
-		actualStudent.setStdName(student.getStdName());
-		actualStudent.setStdEmail(student.getStdEmail());
-		actualStudent.setStdAddr(student.getStdAddr());
-		actualStudent.setStdCourse(student.getStdCourse());
+	public void mapToActualObject(Student actualStudent, Student student) {
+		if(student.getStdName()!= null) {
+			actualStudent.setStdName(student.getStdName());
+		}	
 		actualStudent.setStdFee(student.getStdFee());
-	}
+		actualStudent.setStdCourse(student.getStdCourse());
+		if(student.getStdEmail()!= null) {
+			actualStudent.setStdEmail(student.getStdEmail());
+		}	
+		actualStudent.setStdAddr(student.getStdAddr());
+	}		
 }
