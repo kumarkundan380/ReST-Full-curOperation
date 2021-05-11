@@ -28,7 +28,7 @@ public class SwaggerConfig {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.kundan.controller"))
-				.paths(PathSelectors.regex("/rest.*"))
+				.paths(PathSelectors.regex("/student.*"))
 				.build()
 				.apiInfo(apiInfo());
 	}

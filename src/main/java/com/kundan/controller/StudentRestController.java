@@ -22,7 +22,7 @@ import com.kundan.service.StudentService;
 import com.kundan.util.StudentUtil;
 
 @RestController
-@RequestMapping("rest/student")
+@RequestMapping("/student")
 public class StudentRestController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(StudentRestController.class);
@@ -62,7 +62,7 @@ public class StudentRestController {
 	 *  Sort data using name, return as JSON
 	 *  else String message no data found
 	 */
-	@GetMapping("/all")
+	@GetMapping("/findAll")
 	public ResponseEntity<?> getAllStudents(){
 		LOGGER.info("Entered into method to fetch Student data");
 		ResponseEntity<?> response = null;
